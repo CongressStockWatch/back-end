@@ -3,7 +3,7 @@ require('dotenv').config();
 let token = process.env.QUIVER_API_KEY;
 axios.defaults.headers.common['Authorization'] = `${token}`;
 
-async function getCongressTradingInfo(req, res, next) {
+async function getCongressTradingInfo(res, next) {
   try {
     const results = await axios.get('https://api.quiverquant.com/beta/live/congresstrading');
     let congressTrades = results.data;
@@ -53,12 +53,11 @@ async function getCongressTradingInfo(req, res, next) {
       });
     });
     // console.log(tradesOnDate);
-    // res.status(200).send(tradesOnDate);
+    res.status(200).send(repsTrades, tradesOnDate);
   } catch (e) {
     console.error(e);
   }
 }
-
 // getCongressTradingInfo();
 
 module.exports = getCongressTradingInfo;
