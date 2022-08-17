@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/CongressStockWatch/back-end#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "base-64": "^1.0.0",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
