@@ -39,19 +39,22 @@ async function getCongressTradingInfo(req, res, next) {
       });
     });
     let tradesOnDate = tradeDates.map(date => {
-      return {date: date, numberOfBuys: 0, numberOfSells: 0};
+      return {date: date, numberOfBuys: 0, numberOfSells: 0, netTrades: 0};
     });
     repsTrades.forEach(rep => {
       rep.trades.forEach(trade => {
         tradesOnDate.forEach(date => {
           if (date.date === trade.transactionDate && trade.transaction === 'Purchase') {
             date.numberOfBuys = date.numberOfBuys + 1;
+            date.netTrades = date.netTrades + 1;
           } else if (date.date === trade.transactionDate && trade.transaction === 'Sale') {
             date.numberOfSells = date.numberOfSells + 1;
+            date.netTrades = date.netTrades - 1;
           }
         });
       });
     });
+    console.log(tradesOnDate);
     res.status(200).send({repsTrades, tradesOnDate});
   } catch (e) {
     console.error(e);
