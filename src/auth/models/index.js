@@ -6,7 +6,7 @@ const userSchema = require('./users.js');
 
 const DATABASE_URL = process.env.NODE_ENV === 'test'
   ? 'sqlite::memory'
-  : process.env.DATABASE_URL || 'postgres://localhost:5432/congress-stock-watch';
+  : process.env.DATABASE_URL || 'sqlite::memory';
 
 const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
   dialectOptions: {
