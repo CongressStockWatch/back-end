@@ -11,6 +11,8 @@ const notFound = require('./error-handlers/404.js');
 const authRoutes = require('./auth/router/index.js');
 const sp500 = require('./modules/yahoo');
 const getCongressTradingInfo = require('./modules/quiver');
+const sendEmail = require('./modules/twilio');
+const basicAuth = require('./auth/middleware/basic');
 
 // Prepare the express app
 const app = express();
@@ -29,7 +31,7 @@ app.get('/', (req, res) => {
 app.use(authRoutes);
 app.get('/yahoo', sp500);
 app.get('/quiver', getCongressTradingInfo);
-
+app.post('/alerts', basicAuth ,sendEmail);
 
 // Catchalls
 app.use(notFound);
