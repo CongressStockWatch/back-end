@@ -54,8 +54,9 @@ async function getCongressTradingInfo(req, res, next) {
         });
       });
     });
-    console.log(tradesOnDate);
-    res.status(200).send({repsTrades, tradesOnDate, congressTrades});
+    const newRepTrades = repsTrades.map((trade) => ({representative: trade.representative}));
+    const newCongressTrades = congressTrades.slice(0, 50);
+    res.status(200).send({repsTrades: newRepTrades, tradesOnDate, congressTrades: newCongressTrades});
   } catch (e) {
     console.error(e);
     next(e);
