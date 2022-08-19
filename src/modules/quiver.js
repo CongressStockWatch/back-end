@@ -55,7 +55,7 @@ async function getCongressTradingInfo(req, res, next) {
       });
     });
     console.log(tradesOnDate);
-    res.status(200).send({repsTrades, tradesOnDate});
+    res.status(200).send({repsTrades, tradesOnDate, congressTrades});
   } catch (e) {
     console.error(e);
     next(e);
